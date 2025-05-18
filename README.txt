@@ -1,4 +1,4 @@
-Azan Nazar      B00882606
+Azan Nazar     | B00882606 | anazar1@binghamton.edu
 Winnie Yong     
 
 ********************* HOW IT WORKS *********************
@@ -18,7 +18,7 @@ of different tasks with 5 different options:
 ...
 <add example command using curl as described below>
 
-********** TODO API Server **********
+***************** TODO API Server *****************
 
 1. Add a Task: 
    curl -X POST -d "Your task description" http://localhost:8080/todos
@@ -38,4 +38,14 @@ of different tasks with 5 different options:
 
 5. View Task History (Completed Tasks): 
    curl http://localhost:8080/todos/history
-********************************************
+
+
+********** MEMBER CONTRIBUTION **********
+
+Azan:
+- Setting underlying structure for port, sockets, main and Makefile
+- Implemented adding tasks, viewing all tasks, completing tasks, 
+deleting a task, viewing task history
+
+Winnie:
+- Implement ...
