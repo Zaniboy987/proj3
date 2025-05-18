@@ -11,6 +11,13 @@ of different tasks with 5 different options:
     - Deleting tasks
     - Viewing Task History
 
+********************* HOW TO RUN *********************
+> make clean
+> make
+> ./server
+...
+<add example command using curl as described below>
+
 ********** TODO API Server **********
 
 1. Add a Task: 
