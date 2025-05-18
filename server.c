@@ -40,7 +40,7 @@ void handle_client(int client_socket) {
     buffer[bytes_read] = '\0';
 
     if (strncmp(buffer, "GET /todos/history", 18) == 0) {
-        char response[BUFFER_SIZE] = "200 OK\nContent: text/plain\n\n";
+        char response[BUFFER_SIZE] = "HTTP/1.1 200 OK\nContent: text/plain\n\n";
         for (int i = 0; i < todo_count; i++) {
             if (todo_list[i].completed) {
                 char todo_item[300];
@@ -51,7 +51,7 @@ void handle_client(int client_socket) {
         write(client_socket, response, strlen(response));
     } 
     else if (strncmp(buffer, "GET /todos", 10) == 0) {
-        char response[BUFFER_SIZE] = "200 OK\nContent: text/plain\n\n";
+        char response[BUFFER_SIZE] = "HTTP/1.1 200 OK\nContent: text/plain\n\n";
         for (int i = 0; i < todo_count; i++) {
             char todo_item[300];
             snprintf(todo_item, sizeof(todo_item), "%d. %s [%s]\n", i + 1, todo_list[i].task, todo_list[i].completed ? "Completed" : "Pending");
@@ -66,10 +66,10 @@ void handle_client(int client_socket) {
             strncpy(todo_list[todo_count].task, task_start, 255);
             todo_list[todo_count].completed = 0;
             todo_count++;
-            char response[] = "201 Created\nContent: text/plain\n\nTask added.\n";
+            char response[] = "HTTP/1.1 201 Created\nContent: text/plain\n\nTask added.\n";
             write(client_socket, response, strlen(response));
         } else {
-            char response[] = "400 Bad Request\nContent: text/plain\n\nInvalid request or list full.\n";
+            char response[] = "HTTP/1.1 400 Bad Request\nContent: text/plain\n\nInvalid request or list full.\n";
             write(client_socket, response, strlen(response));
         }
     } 
@@ -77,10 +77,10 @@ void handle_client(int client_socket) {
         int index = atoi(buffer + 11) - 1;
         if (index >= 0 && index < todo_count) {
             todo_list[index].completed = 1;
-            char response[] = "200 OK\nContent: text/plain\n\nTask marked as completed.\n";
+            char response[] = "HTTP/1.1 200 OK\nContent: text/plain\n\nTask marked as completed.\n";
             write(client_socket, response, strlen(response));
         } else {
-            char response[] = "404 Not Found\nContent: text/plain\n\nTask not found.\n";
+            char response[] = "HTTP/1.1 404 Not Found\nContent: text/plain\n\nTask not found.\n";
             write(client_socket, response, strlen(response));
         }
     } 
@@ -91,15 +91,15 @@ void handle_client(int client_socket) {
                 todo_list[i] = todo_list[i + 1];
             }
             todo_count--;
-            char response[] = "200 OK\nContent: text/plain\n\nTask deleted.\n";
+            char response[] = "HTTP/1.1 200 OK\nContent: text/plain\n\nTask deleted.\n";
             write(client_socket, response, strlen(response));
         } else {
-            char response[] = "404 Not Found\nContent: text/plain\n\nTask not found.\n";
+            char response[] = "HTTP/1.1 404 Not Found\nContent: text/plain\n\nTask not found.\n";
             write(client_socket, response, strlen(response));
         }
     } 
     else {
-        char response[] = "404 Not Found\nContent: text/plain\n\nEndpoint not found.\n";
+        char response[] = "HTTP/1.1 404 Not Found\nContent: text/plain\n\nEndpoint not found.\n";
         write(client_socket, response, strlen(response));
     }
 
