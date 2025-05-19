@@ -45,10 +45,12 @@ Then, in another terminal, use the following `curl` commands:
 
 5. View All Tasks: 
    curl http://localhost:8080/todos/<list>
+   Example: curl http://localhost:8080/todos/groceries
 
 6. Complete a Task (by index): 
-   curl -X PUT http://localhost:8080/todos/<index>/complete
-   Example: curl -X PUT http://localhost:8080/todos/1/complete
+   curl -X PUT http://localhost:8080/todos/<list>/<index>/complete
+   Example: curl -X PUT http://localhost:8080/todos/groceries/2/complete
+   Example: curl -X PUT http://localhost:8080/todos/school/1/complete
 
 7. Delete a Task (by index): 
    curl -X DELETE http://localhost:8080/todos/<index>
@@ -62,7 +64,7 @@ Then, in another terminal, use the following `curl` commands:
    curl -X DELETE http://localhost:8080/todos/<list>/completed  
 
 10. Shutdown Server:  
-    curl http://localhost:8080/shutdown 
+   curl http://localhost:8080/shutdown 
 
 
 ********** MEMBER CONTRIBUTION **********
